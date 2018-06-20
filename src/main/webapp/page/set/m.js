@@ -222,7 +222,7 @@ function initQuery() {
 
 					);
 				}
-				$scope.getsysinfo();
+			//	$scope.getsysinfo();
 				
 				
 				$scope.setsysinfo=function(){
@@ -454,7 +454,7 @@ function initQuery() {
 				}
 				// $scope.apply();
 
-				$scope.getList();
+				//$scope.getList();
 
 				return;
 

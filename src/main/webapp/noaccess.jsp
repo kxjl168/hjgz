@@ -6,9 +6,8 @@
 <html>
 <head>
 
-<title>noaccess - KxのBook</title>
-<meta name="keywords" content="KxのBook 个人站点  个人BLOG">
-<meta name="description" content="首页-欢迎访问-Kx的个人站点" />
+<title>noaccess </title>
+
 <meta name="author" content="ZHANG JIE"> 
 
 <meta name="viewport"

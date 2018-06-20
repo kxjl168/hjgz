@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.kxjl.tool.utils.DateUtil;
 import com.kxjl.web.blog.action.Kdata;
-import com.kxjl.web.device.model.Device.RouteFlag;
+
 import com.kxjl.web.system.model.base.BaseModel;
 
 public class Blog extends BaseModel {

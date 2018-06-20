@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
-					<div class="navbar-header">
+					<div class="navbar-header public">
 						<button type="button" id="menuBtn" class="navbar-toggle" data-toggle="collapse" data-target="#menuItem">
 							<span class="sr-only"></span>
 							<span class="glyphicon glyphicon-th-list  "></span>

@@ -159,7 +159,7 @@
   }
   
   .navbar-header .navbar-brand{
-   visibility: hidden;
+   visibility: visible;
    }
   .toptitle{
    color: #e3d6a3!important;
@@ -186,7 +186,7 @@
   
    .navbar-fixed-top   .navbar-header.public
   {
-   height: 110px;
+   height: 40px;
    position: relative;
   }
    .navbar-fixed-top.fixed  .navbar-header.public{
@@ -447,7 +447,7 @@ blockquote {
 
 .panel-success
 {
-	 border:0px;
+	/* border:0px;*/
 }
 
 .panel-success > .panel-heading {
@@ -455,13 +455,15 @@ blockquote {
 	background: #7673d9;
 	border-color: #534ed9;
 	*/
-  color: #333086;
-  background-color: #708afd2d; 
+ /* color: #333086; */
+  background-color: #fff; 
+  height:50px;
+  
  
   /* background-size: 25px 25px ;*/
   /* background-repeat: no-repeat; */
-
-  border-left:5px solid  #324fadc0;
+ margin:5px;
+  border-bottom:1px solid  #eee;
 }
 /* .panel-success>.panel-heading{
 	color:#1f1ab2;
@@ -841,7 +843,7 @@ a {
 }
 
 .navbar-toggle{
-    position: absolute;
+    /*position: absolute; */
     /* vertical-align: bottom; */
     /* display: block; */
     bottom: 5px;

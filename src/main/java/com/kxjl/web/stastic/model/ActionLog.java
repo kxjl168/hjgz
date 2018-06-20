@@ -3,7 +3,7 @@ package com.kxjl.web.stastic.model;
 import java.util.List;
 
 import com.kxjl.web.blog.model.Blog;
-import com.kxjl.web.device.model.Device.RouteFlag;
+
 import com.kxjl.web.system.model.base.BaseModel;
 
 public class ActionLog extends BaseModel {

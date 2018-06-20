@@ -11,7 +11,7 @@
 			<title>管理后台</title>
 
 			<meta name="viewport" content="width=device-width, initial-sclae=1.0, maximun-scale=1.0, minimum-scale=1.0, user0scalable=yes">
-			<meta name="description" content="登录-欢迎访问-Kx的个人站点" />
+		
 			<meta name="author" content="ZHANG JIE">
 			<link rel="stylesheet" type="text/css" media="screen" href="${basePath}/js/plugin/bootstrap/css/bootstrap.min.css">
 
@@ -185,6 +185,8 @@
 
 			<script type="text/javascript" src="${basePath}/js/plugin/angular/angular.min.js"></script>
 
+	<script type="text/javascript"
+		src="${basePath}/js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
 
 

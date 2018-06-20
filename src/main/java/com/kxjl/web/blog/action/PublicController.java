@@ -52,7 +52,7 @@ public class PublicController extends BaseController {
 	public ModelAndView list(HttpServletRequest request) {
 
 		ModelAndView view = getSysData();
-		view.setViewName("/public/index/main");
+		view.setViewName("/public/portal/main");
 
 		return view;
 	}
@@ -60,12 +60,12 @@ public class PublicController extends BaseController {
 	private ModelAndView getSysData() {
 		ModelAndView view = new ModelAndView();
 
-		Map jsInfo = sysService.getSysInfo();
+		//Map jsInfo = sysService.getSysInfo();
 
-		view.addObject("httppath", jsInfo.get("httppath"));
-		view.addObject("head", jsInfo.get("fileinfo"));
-		view.addObject("sign", jsInfo.get("sign"));
-		view.addObject("visitdata", jsInfo.get("visitData"));
+		//view.addObject("httppath", jsInfo.get("httppath"));
+		//view.addObject("head", jsInfo.get("fileinfo"));
+		//view.addObject("sign", jsInfo.get("sign"));
+		//.addObject("visitdata", jsInfo.get("visitData"));
 		return view;
 	}
 

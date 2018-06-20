@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import com.kxjl.web.blog.model.Blog;
 import com.kxjl.web.blog.model.Replay;
-import com.kxjl.web.device.model.Device.RouteFlag;
+
 import com.kxjl.web.system.model.MenuInfo;
 
 /**

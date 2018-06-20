@@ -72,55 +72,7 @@
 
 
 
-			<div class="row col-xs-12 ">
-				<div class="panel panel-success">
-					<div class="panel-heading" title="点击显示/隐藏查询条件"
-						data-toggle="collapse" data-parent="#accordion"
-						href="#collapseOne">
-						<div class="row">
-							<h3 class="panel-title col-xs-10 ">html管理</h3>
-
-
-
-							<span id="titlepic" data-toggle="collapse"
-								data-parent="#accordion" href="#collapseOne"
-								class="hide glyphicon glyphicon-chevron-up pull-right "></span>
-						</div>
-					</div>
-					<div id="collapseOne" class="panel-collapse collapse in ">
-						<div class="panel-body">
-
-							<div class="container">
-
-
-
-								<div class="row  form-group margin-bottom-5">
-
-
-
-									<div class="  col-sm-2 col-xs-12 ">
-										<button type="button" ng-click="cleanHtml()"
-											class="btn btn-primary btn-block   ">清除静态html缓存</button>
-									</div>
-
-
-
-
-								</div>
-
-
-
-
-
-							</div>
-
-
-
-						</div>
-
-					</div>
-				</div>
-			</div>
+			
 
 
 
@@ -354,82 +306,7 @@
 
 
 
-			<div class="row col-xs-12 ">
-				<div class="panel panel-success">
-					<div class="panel-heading" title="点击显示/隐藏查询条件"
-						data-toggle="collapse" data-parent="#accordion"
-						href="#collapseOne2">
-						<div class="row">
-							<h3 class="panel-title col-xs-4 col-lg-4 col-md-4 ">系统设置修改</h3>
-
-
-
-							<span id="titlepic" data-toggle="collapse"
-								data-parent="#accordion" href="#collapseOne"
-								class="hide glyphicon glyphicon-chevron-up pull-right "></span>
-						</div>
-					</div>
-					<div id="collapseOne2" class="panel-collapse collapse in ">
-						<div class="panel-body">
-
-							<div class="container">
-
-
-							
-
-
-
-<div class="row  col-lg-6 nopaddding  form-group  margin-bottom-5">
-
-									<div
-										class=" col-sm-8  col-xs-12 row nopaddding margin-bottom-5">
-										<div
-											class="control-label padding-top-0 col-xs-4 nopaddding col-sm-3  ">签名：</div>
-										<div class="  col-sm-5 col-xs-8 text-right ">
-											<input required  type="text" class="form-control "
-												name="s_sign" id="s_sign" ng-model="s_sign"
-												placeholder=" ">
-										</div>
-									</div>
-									
-									
-									
-									<div
-										class=" col-sm-8  col-xs-12 row nopaddding margin-bottom-5">
-										<div
-											class="control-label padding-top-0 col-xs-4 nopaddding col-sm-3  ">头像：</div>
-										<div class="  col-sm-5 col-xs-8 text-right ">
-											<div id="headimg"></div>
-										</div>
-									</div>
-									
-									<div
-										class=" col-sm-8  col-xs-12 nopaddding row mar margin-bottom-5">
-										<div
-											class="control-label nopaddding padding-top-0 col-xs-4 col-sm-3  "></div>
-										<div class="  col-sm-5 col-xs-12 text-right ">
-												<button type="button" ng-click="setsysinfo()" class="row  btn btn-primary btn-block   ">修改</button>
-										</div>
-
-
-
-
-									</div>	
-			</div>
-									
-
-								
-									
-
-									
-						
-
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
+			
 
 
 

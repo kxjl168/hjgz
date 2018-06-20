@@ -193,8 +193,8 @@ public class SysUserController extends BaseController {
 		}
 		
 		
-		if(request.getContextPath().contains("/kb"))
-			map.put("url", "/kb");
+		if(!request.getContextPath().equals("/"))//contains("/kb"))
+			map.put("url",request.getContextPath());//
 		else
 		map.put("url", "/");
 		

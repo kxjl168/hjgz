@@ -57,8 +57,7 @@ import com.kxjl.tool.config.ConfigReader;
 import com.kxjl.tool.prerenderio.PrerenderConfig;
 import com.kxjl.tool.prerenderio.PrerenderSeoService;
 import com.kxjl.tool.utils.JsonUtil;
-import com.kxjl.web.device.model.Device;
-import com.kxjl.web.device.service.DeviceService;
+
 import com.kxjl.web.stastic.model.ActionLog.StasticTypeOne;
 import com.kxjl.web.system.action.base.BaseController;
 
@@ -66,8 +65,7 @@ import com.kxjl.web.system.action.base.BaseController;
 @RequestMapping(value = "/search")
 public class SearchController extends BaseController {
 
-	@Autowired
-	DeviceService deviceService;
+	
 	private final static Logger log = LoggerFactory
 			.getLogger(SearchController.class);
 

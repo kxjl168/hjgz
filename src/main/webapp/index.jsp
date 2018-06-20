@@ -8,11 +8,8 @@
 <head>
 
 
-<meta name="keywords" content="KxのBook 个人站点  个人BLOG">
-<meta name="description" content="首页-欢迎访问-Kx的个人站点" />
-<meta name="author" content="ZHANG JIE"> 
 
-			<title>KxのBook,Welcome~</title>
+			<title>index</title>
 <meta name="viewport"
 	content="width=device-width, initial-sclae=1.0, maximun-scale=1.0, minimum-scale=1.0, user0scalable=yes">
 
@@ -36,6 +33,7 @@
 
 
 	<script type="text/javascript">
+	alert(1);
                 document.location = basePath+"/public/index/";     //默认跳转登录页面
             </script>
 
