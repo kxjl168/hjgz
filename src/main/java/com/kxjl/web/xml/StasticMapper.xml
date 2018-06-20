@@ -20,7 +20,7 @@
 		resultType="java.lang.Integer">
 	
 	select count(*) from (	
-select log.*,b.title blogname  from user_action_log log left join blog_info b on log.blog_id=b.imei
+select log.*,b.title itemname  from item_action_log log left join item_info b on log.item_id=b.id
  where
  type_first='${type_first}' 
 	<if test='type_second!=null and type_second!= "" '>
@@ -41,7 +41,7 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 <select id="GetActionList"  parameterType="com.kxjl.web.stastic.model.ActionLog"
 		 resultMap="ActionLogMap">
 		
-select log.*,b.title blogname  from user_action_log log left join blog_info b on log.blog_id=b.imei
+select log.*,b.title itemname  from item_action_log log left join item_info b on log.item_id=b.id
  where
  type_first='${type_first}' 
 	<if test='type_second!=null and type_second!= "" '>
@@ -62,7 +62,7 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 	<select id="GetDetailList"  parameterType="com.kxjl.web.stastic.model.ActionLog"
 		 resultMap="ActionLogMap">
 		
-select city,userid,count(*) total_uv from user_action_log where
+select city,userid,count(*) total_uv from item_action_log where
  type_first='${type_first}' 
 	<if test='type_second!=null and type_second!= "" '>
  and type_second='${type_second}'
@@ -80,7 +80,7 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 		 resultType="java.lang.Integer">
 	
 	    select count(*) from (
-select city,userid,count(*) total_uv from user_action_log where 
+select city,userid,count(*) total_uv from item_action_log where 
 type_first='${type_first}' 
 	<if test='type_second!=null and type_second!= "" '>
  and type_second='${type_second}'
@@ -97,7 +97,7 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 	
 	<select id="GetStaticTypeList" 
 		 resultMap="DictInfoMap">
-		 select CONCAT(type_first,'_',type_second) dict_key,name dict_name from user_action_log_template
+		 select CONCAT(type_first,'_',type_second) dict_key,name dict_name from item_action_log_template
 	</select>
 	
 	
@@ -113,8 +113,8 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 		select * from (
 		(select tmp.*,u.name,app.name app_name
 		,date_format( str_to_date(action_date,'%Y-%m-%d %H:%i:%s'),'${dateFormat}') hour
-		from user_action_log tmp
-		left join user_action_log_template app on tmp.type_first=app.type_first
+		from item_action_log tmp
+		left join item_action_log_template app on tmp.type_first=app.type_first
 		left join user u on tmp.userid=u.userid
 		where tmp.type_first in('应用服务','办事指南')
 			<if test='sex != "" '>
@@ -128,8 +128,8 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 		(
 		select tmp.*,u.name,app.name app_name
 		,date_format( str_to_date(action_date,'%Y-%m-%d %H:%i:%s'),'${dateFormat}') hour
-		from user_action_log tmp
-		left join user_action_log_template app on tmp.type_second=app.type_second
+		from item_action_log tmp
+		left join item_action_log_template app on tmp.type_second=app.type_second
 		and tmp.type_first=app.type_first
 		left join user u on tmp.userid=u.userid
 		where tmp.type_first not in('应用服务','办事指南','svr_error')
@@ -163,7 +163,7 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 		from (
 		select tmp.*,u.name,app.app_name
 		,date_format( str_to_date(action_date,'%Y-%m-%d %H:%i:%s'),'${dateFormat}') hour
-		from user_action_log tmp
+		from item_action_log tmp
 		left join app_service_info app on tmp.type_second=app.app_id
 		left join user u on tmp.userid=u.userid
 		where tmp.type_first='应用服务'
@@ -317,14 +317,14 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 	<insert id="addActionLog" parameterType="com.kxjl.web.stastic.model.ActionLog">
 		insert
 		into
-		user_action_log
+		item_action_log
 		(
 		userid,
 		action_date,
 		type_first,
 		type_second,
 		city,
-		blog_id
+		item_id
 		)
 		values(
 		#{userid},
@@ -332,7 +332,7 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 		#{type_first},
 		#{type_second},
 		#{city},
-		#{blog_id}
+		#{item_id}
 
 		)
 	</insert>

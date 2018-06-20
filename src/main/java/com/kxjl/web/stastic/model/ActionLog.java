@@ -68,7 +68,7 @@ public class ActionLog extends BaseModel {
 	private String type_first;// varchar(20) comment '操作大类； 办事指南/应用服务',
 	private String type_second;// varchar(20) comment '具体的项ID,'
 
-	private String blog_id;
+	private String item_id;
 	
 	private Double total_click;
 	private Double total_uv;
@@ -83,9 +83,8 @@ public class ActionLog extends BaseModel {
 	//查询结束时间
 	private String action_date_end;// varchar(20) comment '操作时间 2016-01-01
 	
-	//query 
-	private String blogname;
-	
+	private String itemname;
+
 	public String getUserid() {
 		return userid;
 	}
@@ -184,21 +183,9 @@ public class ActionLog extends BaseModel {
 		this.dateFormat = dateFormat;
 	}
 
-	public String getBlog_id() {
-		return blog_id;
-	}
 
-	public void setBlog_id(String blog_id) {
-		this.blog_id = blog_id;
-	}
 
-	public String getBlogname() {
-		return blogname;
-	}
 
-	public void setBlogname(String blogname) {
-		this.blogname = blogname;
-	}
 
 	public String getId() {
 		return id;
@@ -206,6 +193,22 @@ public class ActionLog extends BaseModel {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getItem_id() {
+		return item_id;
+	}
+
+	public void setItem_id(String item_id) {
+		this.item_id = item_id;
+	}
+
+	public String getItemname() {
+		return itemname;
+	}
+
+	public void setItemname(String itemname) {
+		this.itemname = itemname;
 	}
 
 	

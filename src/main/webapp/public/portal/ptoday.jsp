@@ -17,10 +17,13 @@
                 </div>
             </div>
             <div id="collapseOner11" class="panel-collapse collapse in ">
-                <div class="panel-body">
+                <div class="panel-body nopaddding">
 
-                    dddddddddddddddddddd
-
+                      <div class="table-responsive" style="margin: 1px;">
+										<table id="table_detail"
+											class="table table-bordered table-hover"></table>
+						</div>
+						
 
 
                 </div>

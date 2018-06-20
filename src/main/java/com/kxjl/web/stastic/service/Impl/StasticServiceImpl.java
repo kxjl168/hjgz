@@ -52,7 +52,7 @@ public class StasticServiceImpl implements StasticService {
 		final HttpServletRequest rt = request;
 		final String t1 = type1;
 		final String t2 = type2;
-		final String blogimei = arctileId;
+		final String itemid = arctileId;
 
 		new Thread(new Runnable() {
 
@@ -72,7 +72,7 @@ public class StasticServiceImpl implements StasticService {
 					log.setUserid(ip);
 
 					String city = IPUtils.getCityByIP(ip);
-					log.setBlog_id(blogimei);
+					log.setItem_id(itemid);
 					log.setCity(city);
 					log.setType_first(t1);
 					log.setType_second(t2);

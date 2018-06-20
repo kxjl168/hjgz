@@ -120,6 +120,8 @@
 
 
 
+	<script type="text/javascript" src="${basePath}/js/plugin/bootstrap-table/js/bootstrap-table.min.js"></script>
+				<script type="text/javascript" src="${basePath}/js/plugin/bootstrap-table/js/bootstrap-table-zh-CN.js"></script>
 
 
 	<script type="text/javascript"
