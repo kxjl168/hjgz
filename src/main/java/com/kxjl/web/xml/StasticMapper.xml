@@ -251,12 +251,15 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 
 	<select id="GetHourDetailList" parameterType="com.kxjl.web.stastic.model.ActionLog"
 		resultMap="ActionLogMap">
-		select d.* from user_action_hour d
+		select d.* from item_action_hour d
 
 		where 1=1
 		and
 		type_first=#{type_first}
-		and type_second=#{type_second}
+		<if test="type_second!=null and type_second!='' ">
+		and type_second=#{type_second}    
+		</if>
+		
 		and
 		str_to_date(action_date,'%Y-%m-%d %H') BETWEEN
 		str_to_date(#{action_date},'%Y-%m-%d %H') and
@@ -271,7 +274,9 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 		where 1=1
 		and
 		type_first=#{type_first}
-		and type_second=#{type_second}
+	<if test="type_second!=null and type_second!='' ">
+		and type_second=#{type_second}    
+		</if>
 		and
 		str_to_date(action_date,'%Y-%m') BETWEEN
 		str_to_date(#{action_date},'%Y-%m') and
@@ -281,12 +286,14 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 
 	<select id="GetDayDetailList" parameterType="com.kxjl.web.stastic.model.ActionLog"
 		resultMap="ActionLogMap">
-		select d.* from user_action_day d
+		select d.* from item_action_day d
 
 		where 1=1
 		and
 		type_first=#{type_first}
-		and type_second=#{type_second}
+		<if test="type_second!=null and type_second!='' ">
+		and type_second=#{type_second}    
+		</if>
 		and
 		str_to_date(action_date,'%Y-%m-%d') BETWEEN
 		str_to_date(#{action_date},'%Y-%m-%d') and
@@ -300,7 +307,7 @@ str_to_date(action_date,'${dateFormat}') = str_to_date('${time1}','${dateFormat}
 		resultMap="ActionLogMap">
 		select d.*
 		, substring(d.action_date,12,2) type_name from
-		user_action_hour d
+		item_action_hour d
 		where 1=1 and
 		type_first=#{type_first}
 		and

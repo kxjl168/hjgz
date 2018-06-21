@@ -43,14 +43,248 @@ function changerows(option) {
 	});
 };
 
+
+
+function changetype(e){
+	var item=$(e);
+		$("#idDropDownAlertType").html($(item).find("a").html());
+		$(item).parents().find("li").removeClass("active");
+		$(item).addClass("active");
+		$("#s_type").val($(item).find("a").attr("value"));
+		//(".dropdown-menu").show();
+		
+		getChartList();
+	}
+
+function getChartList(){
+	
+var $scope = angular.element(ngSection).scope();
+$scope.$apply(function() {
+$scope.getChartList();
+});
+
+}
+
 function init() {
 
 	initmenu_p($("#menuul"), "public/index/");
 
+	
 
+
+
+	//$(item).addcss("active");
+	
+
+
+	var $scope = angular.element(ngSection).scope();
+	$scope.$apply(function() {
+
+	$scope.getTypeList = function (id, fucOnFinished, clear) {
+
+		var http = getImUrl();// "";
+
+		var obj = new Object();
+
+		//obj.deviceid = $scope.id;// "12345678";
+		//obj.ip = $scope.ip;
+		//obj.compy_name = $scope.compy_name;
+		obj.page = 1;// 1;// "12345678";
+		obj.rows = 40;// 10;// "12345678";
+
+		SZUMWS(http + "statistics/getTypeInfoList.action", JSON
+			.stringify(obj), function succsess(json) {
+
+				var code = json.ResponseCode;
+				var message = json.ResponseMsg;
+				console.log('-----return -code= ' + code + ';message= '
+					+ message);
+				if (code == 200) {
+
+
+					$scope.types_select = eval(json.datalist);
+
+					 setTimeout(function(){
+							
+						  // $('#p_proxyserver_id').find("option:selected").attr("selected", false);
+						   $('#s_type').get(0).selectedIndex=1;
+						   // alert($("#p_proxyserver_id").val());
+						    $scope.s_type=$("#s_type").val();
+						  
+						    
+						//    $scope.getList();
+						    
+					   }, 30);
+					
+
+					$scope.$apply();
+
+					console.log('-----guideList -OK= ');
+
+				} else {
+					msg(message);
+				}
+
+				
+
+
+			}, function error(data) {
+				msg("网络异常!");
+
+			
+
+			}, false, false
+
+		);
+
+	};
+	$scope.getTypeList();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	$scope.getChartList = function(id, fucOnFinished, clear) {
+
+		
+		
+		
+		$scope.page = (id != null) ? id :1;
+		
+		
+		if($scope.page>$scope.pageNum)
+			$scope.page=$scope.page-1;
+		
+		if($scope.page<=0)
+			$scope.page=1;
+		
+		
+
+		var http = getImUrl();// "";
+
+		var obj = new Object();
+		obj.date1 = $("#effectDate").val();// "12345678";
+		obj.date2 = $("#effectDate2").val();// "12345678";
+		obj.date_type = $("#dateType").val();
+		//obj.qName = $("#s_type ").find("option:selected").text();
+		
+		obj.qType =$("#s_type").val();
+		//obj.showall = $scope.showall?"false":"true";
+		
+		//msg(obj.showall);
+		
+		
+		obj.page = $scope.page;// 1;// "12345678";
+		obj.rows = $scope.rows;// 10;// "12345678";
+		SZUMWS(http + "statistics/getAppStaticData.action", JSON
+				.stringify(obj), function succsess(json) {
+			// var json = JSON.parse(decryData);
+			var code = json.ResponseCode;
+			var message = json.ResponseMsg;
+			console.log('-----return -code= ' + code + ';message= '
+					+ message);
+			if (code == 200) {
+
+		
+				$scope.datalist =eval(json.rows);
+				
+				setchartdata(json.rows);
+
+			
+					
+					$scope.$apply();
+					
+				//console.log('-----guideList -OK= ');
+
+			} else {
+				msg(message);
+			}
+
+		
+
+			//$('#refresh').removeClass('visible');
+			//$('#refresh2').removeClass('visible');
+
+		}, function error(data) {
+			msg("网络异常!");
+
+		
+		//	$("#refresh").removeClass('visible');
+			//$('#refresh2').removeClass('visible');
+
+		}, false, "json"
+
+		);
+		
+	}
+	
+	
+	
+	});
 
 	
 	initDetailTable();
+	
+
+	
+	$.each($(".time").find("span"),function(index,item){
+		
+		$(item).click(function(){
+			$(".time span").removeClass("select");
+			$(item).addClass("select");
+			
+			if($(item).html()=="今天")
+				$("#dateType").val("HOUR");
+			else if($(item).html()=="本月")
+				$("#dateType").val("MONTH");
+			else
+				$("#dateType").val("DAY");
+			
+			
+			var datetype = $(item).html();
+			var now=new Date();
+			var before=new Date();
+			var format = "yyyy-MM-dd HH";
+			if (datetype == "今天")
+				{
+				before.setHours(0);
+				format = "yyyy-MM-dd HH";
+				}
+				
+			else if (datetype == "本周")
+				{
+				before.setDate(before.getDate()-10);
+				format = "yyyy-MM-dd";
+				}
+				
+			else if (datetype == "本月")
+				{
+				before.setMonth(now.getMonth());
+				format = "yyyy-MM";
+				}
+				
+
+			var begindate =before.Format(format);
+			var enddate = now.Format(format);
+			
+			$("#effectDate").val(begindate);
+			$("#effectDate2").val(enddate);
+			
+			getChartList();
+		});
+		
+		
+	});
+	
+	$(".time").find(".select").trigger("click");
+		
+	
 
 };
 
@@ -76,7 +310,7 @@ function initDetailTable() {
         searchOnEnterKey: true,
         striped: true, // 是否显示行间隔色
         cache: false, // 是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-        pagination: true, // 是否显示分页（*）
+        pagination: false, // 是否显示分页（*）
         sidePagination: "server", // 分页方式：client客户端分页，server服务端分页（*）
         pageNumber: 1, // 初始化加载第一页，默认第一页
         pageSize: 10, // 每页的记录行数（*）
@@ -123,20 +357,32 @@ function initDetailTable() {
         	{
             field: 'itemname',
             title: '标题',
-            align: 'center',
-            valign: 'middle'
+            align: 'left',
+            valign: 'middle',
+            formatter:function(value,row,index){
+            	return  '<img class="rimg img-responsive" src="'+basePath+"/images/hjgz/see.png"+'">'+row.itemname+','+row.type_second;
+            }
         },
         
         {
             title: '操作',
             field: 'vehicleno',
             align: 'center',
-           /* formatter: modifyAndDeleteButton,
-            events: PersonnelInformationEvents */
+           formatter: modifyAndDeleteButton,
+            events: PersonnelInformationEvents 
         }
         ],
     });
 }
+
+function modifyAndDeleteButton(value,row,index){
+	return " <img id='see' class='rimg img-responsive'  src='"+basePath+"/images/hjgz/detail.png"+"'>";
+}
+window.PersonnelInformationEvents={
+ "img #see":function(){
+	 info("ddd");
+ },
+ }
 
 
 

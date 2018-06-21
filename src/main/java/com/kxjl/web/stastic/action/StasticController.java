@@ -798,12 +798,7 @@ public class StasticController extends BaseController {
 
 			jsonIN = new JSONObject(data);
 
-			String blog_type = jsonIN.optString("name");
-			String dict_type = "blog_type";
-
-			int pageCount = jsonIN.optInt("rows");// request.getParameter("pageCount");
-			int curPage = jsonIN.optInt("page");
-
+		
 	
 			List<DictInfo> infos = stasticService.GetStaticTypeList();
 					
@@ -876,9 +871,16 @@ public class StasticController extends BaseController {
 			String type2 = qType.substring(qType.lastIndexOf("_") + 1,
 					qType.length());
 
-			int pageCount = Integer.parseInt(request.getParameter("rows"));// request.getParameter("pageCount");
-			int curPage = Integer.parseInt(request.getParameter("page"));
-	
+			int pageCount =30;
+			int curPage =1;
+			try {
+				 pageCount = Integer.parseInt(request.getParameter("rows"));// request.getParameter("pageCount");
+				 curPage = Integer.parseInt(request.getParameter("page"));
+		
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
 			
 			String dateFormat="%Y-%m-%d %H";
 			if(time_type.equals("HOUR"))

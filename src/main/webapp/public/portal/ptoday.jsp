@@ -4,7 +4,7 @@
 
 
 	<div class=" panel panel-success kpanel">
-            <div class="panel-heading " title="" data-toggle="collapse" data-parent="#accordion" href="#collapseOner11">
+            <div class="panel-heading " title="" >
                 <div class="row">
                     <h3 class="panel-title  col-xs-10">
                     当天
@@ -21,7 +21,7 @@
 
                       <div class="table-responsive" style="margin: 1px;">
 										<table id="table_detail"
-											class="table table-bordered table-hover"></table>
+											class="table table-hjgz table-bordered table-hover"></table>
 						</div>
 						
 

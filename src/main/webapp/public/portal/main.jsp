@@ -28,13 +28,13 @@
 
 								<script type="text/javascript"
 									src="${basePath}/js/plugin/jquery/jquery.v1.11.3.js"></script>
+<script type="text/javascript"
+									src="${basePath}/js/plugin/jquery/jquery-ui.js"></script>
 
 								<script type="text/javascript"
 									src="${basePath}/js/plugin/bootstrap/js/bootstrap.min.js"></script>
 
-								<script type="text/javascript"
-									src="${basePath}/js/plugin/jquery/jquery-ui.js"></script>
-
+								
 								<script type="text/javascript"
 									src="${basePath}/js/plugin/angular/angular.min.js"></script>
 								<script type="text/javascript"
@@ -56,7 +56,6 @@
 
 
 
-
 	<%@include file="../phead.jsp"%>
 
 	<div class="" id="content" style="">
@@ -70,7 +69,8 @@
 
 				<div id="pgdiv" name="pgdiv" class="col-sm-12 col-xs-12 ">
 
-
+								
+						
 					<div class=" row">
 						<%@include file="ptop.jsp"%>
 					</div>
@@ -140,8 +140,12 @@
 	<script src="${basePath}/js/own/menu.js"></script>
 	<script src="${basePath}/js/own/loading.js"></script>
 
-
-
+ 
+  <script src="<c:out value="${basePath}"/>/js/plugin/echart/echarts.js"></script>
+  <script type="text/javascript" src="${basePath}/public/portal/time.js"></script>
+ 
+ <script type="text/javascript" src="${basePath}/public/portal/chart.js"></script>
+ 
 	<!-- <script type="text/javascript" src="${basePath}/js/plugin/select2/select2.full.min.js"></script>  -->
 	<script type="text/javascript" src="${basePath}/public/portal/index.js"></script>
 
