@@ -40,16 +40,16 @@ import com.kxjl.tool.utils.JsonUtil;
 import com.kxjl.tool.utils.StringUtil;
 import com.kxjl.web.autodata.dao.VisitDataMapper;
 import com.kxjl.web.autodata.model.VisitData;
-import com.kxjl.web.blog.action.Kdata;
-import com.kxjl.web.blog.action.Kdata.DataType;
-import com.kxjl.web.blog.model.Blog;
+
+import com.kxjl.web.system.Kdata;
+import com.kxjl.web.system.Kdata.DataType;
 import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.system.dao.DictInfoDao;
 import com.kxjl.web.system.dao.SvrFileInfoDao;
 import com.kxjl.web.system.model.DictInfo;
 import com.kxjl.web.system.model.SvrFileInfo;
 import com.kxjl.web.system.model.SysParameter;
-import com.kxjl.web.system.service.CommonService;
+
 import com.kxjl.web.system.service.DictInfoService;
 import com.kxjl.web.system.service.SysService;
 import com.kxjl.web.system.service.SystemParamService;
@@ -72,8 +72,6 @@ public class SysBaseInfoController extends BaseController {
 	@Autowired
 	private DictInfoDao dictInfoService;
 
-	@Autowired
-	private CommonService commonService;
 
 	@Autowired
 	private SvrFileInfoDao fileInfoDao;
@@ -317,15 +315,10 @@ public class SysBaseInfoController extends BaseController {
 			DataType t = DataType.parse(type);
 			if (t == DataType.Common)
 				Kdata.getInstance().cleanrCommonList("");
-			if (t == DataType.Blog)
-				Kdata.getInstance().cleanrBLogList("");
+			
 			else if (t == DataType.Menu)
 				Kdata.getInstance().cleanrMenuInfoList("");
-			else if (t == DataType.Replay)
-				Kdata.getInstance().cleanrReplayList("");
-			else if (t == DataType.BlackIPList) {
-				commonService.resetBlackIPList();
-			}
+		
 
 			jsonOut.put("ResponseCode", "200");
 			jsonOut.put("ResponseMsg", "");

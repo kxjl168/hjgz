@@ -17,7 +17,7 @@
 
         <!-- 数据库连接 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.100.42:3306/kb?useUnicode=true&amp;characterEncoding=UTF-8"
+                        connectionURL="jdbc:mysql://192.168.31.239:3306/hjgz?useUnicode=true&amp;characterEncoding=UTF-8"
                         userId="root"
                         password="123456">
         </jdbcConnection>
@@ -67,7 +67,7 @@
         <table tableName="iot_user_scene_log" domainObjectName="UserSceneLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
         <table tableName="iot_warning" domainObjectName="Warning" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/> -->
         
-          <table tableName="visit_data" domainObjectName="VisitData" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+          <table tableName="item_info" domainObjectName="ItemInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
         <!--     <table tableName="iot_sys_role" domainObjectName="Role" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
               <table tableName="iot_sys_role_permission" domainObjectName="RolePermission" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
                 <table tableName="iot_sys_user_role" domainObjectName="UserRole" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>

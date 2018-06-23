@@ -29,6 +29,26 @@ public interface StasticService {
 			String type2,String arctileId ) ;
 	
 	/**
+	 * 实时统计
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2018-6-23
+	 */
+	public List<ActionLog> GetStaticDataNow(ActionLog query);
+	
+	/**
+	 * 历史统计
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2018-6-23
+	 */
+	public List<ActionLog> GetStaticData(ActionLog query);
+	
+	/**
 	 * 记录访问统计原始数据
 	 * 
 	 * @param map

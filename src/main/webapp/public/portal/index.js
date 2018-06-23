@@ -45,6 +45,19 @@ function changerows(option) {
 
 
 
+
+function h_changetype(e){
+	var item=$(e);
+		$("#h_idDropDownAlertType").html($(item).find("a").html());
+		$(item).parents().find("li").removeClass("active");
+		$(item).addClass("active");
+		$("#h_s_type").val($(item).find("a").attr("value"));
+		//(".dropdown-menu").show();
+		
+		getChartTable();
+	}
+
+
 function changetype(e){
 	var item=$(e);
 		$("#idDropDownAlertType").html($(item).find("a").html());
@@ -64,6 +77,16 @@ $scope.getChartList();
 });
 
 }
+
+function getChartTable(){
+	
+	var $scope = angular.element(ngSection).scope();
+	$scope.$apply(function() {
+	$scope.getChartTable();
+	});
+
+	}
+
 
 function init() {
 
@@ -141,13 +164,281 @@ function init() {
 	$scope.getTypeList();
 	
 	
+
+	$scope.getTodo = function(id, fucOnFinished, clear) {
+
+			
+			
+			
+			$scope.page = (id != null) ? id :1;
+			
+			
+			if($scope.page>$scope.pageNum)
+				$scope.page=$scope.page-1;
+			
+			if($scope.page<=0)
+				$scope.page=1;
+			
+			
+			var now=new Date();
+			var before=new Date();
+			var format = "yyyy-MM-dd";
+			
+				before.setHours(0);
+				format = "yyyy-MM-dd";
+			
+			var begindate =before.Format(format);
+			var enddate = now.Format(format);
+			
+			
+			
+
+			var http = getImUrl();// "";
+
+			var obj = new Object();
+			obj.date1 = begindate;// "12345678";
+			obj.date2 = enddate;// "12345678";
+			obj.date_type = "DAY";
+			//obj.qName = $("#s_type ").find("option:selected").text();
+			obj.table="item_action_log";
+			obj.qType ="异常_";
+			//obj.showall = $scope.showall?"false":"true";
+			
+			//msg(obj.showall);
+			
+			
+			obj.page = $scope.page;// 1;// "12345678";
+			obj.rows = $scope.rows;// 10;// "12345678";
+			SZUMWS(http + "statistics/GetStaticData.action", JSON
+					.stringify(obj), function succsess(json) {
+				// var json = JSON.parse(decryData);
+				var code = json.ResponseCode;
+				var message = json.ResponseMsg;
+				//console.log('-----return -code= ' + code + ';message= '
+				//		+ message);
+				if (code == 200) {
+
+			
+					$scope.tododata =json.rows[0];
+					
+					//setchartdatabledatata(json.rows);
+
+				
+						
+						$scope.$apply();
+						
+					//console.log('-----guideList -OK= ');
+
+				} else {
+					msg(message);
+				}
+
+			
+
+				//$('#refresh').removeClass('visible');
+				//$('#refresh2').removeClass('visible');
+
+			}, function error(data) {
+				msg("网络异常!");
+
+			
+			//	$("#refresh").removeClass('visible');
+				//$('#refresh2').removeClass('visible');
+
+			}, false, "json"
+
+			);
+			
+		};
+		//$scope.getTodo();
+		
+	
+
+	
+$scope.getChartTable = function(id, fucOnFinished, clear) {
+
+		
+		
+		
+		$scope.page = (id != null) ? id :1;
+		
+		
+		if($scope.page>$scope.pageNum)
+			$scope.page=$scope.page-1;
+		
+		if($scope.page<=0)
+			$scope.page=1;
+		
+		
+
+		var http = getImUrl();// "";
+
+		var obj = new Object();
+		obj.date1 = $("#h_effectDate").val();// "12345678";
+		obj.date2 = $("#h_effectDate2").val();// "12345678";
+		obj.date_type = $("#h_dateType").val();
+		//obj.qName = $("#s_type ").find("option:selected").text();
+		
+		obj.qType =$("#h_s_type").val();
+		//obj.showall = $scope.showall?"false":"true";
+		
+		//msg(obj.showall);
+		
+		
+		obj.page = $scope.page;// 1;// "12345678";
+		obj.rows = $scope.rows;// 10;// "12345678";
+		SZUMWS(http + "statistics/GetStaticData.action", JSON
+				.stringify(obj), function succsess(json) {
+			// var json = JSON.parse(decryData);
+			var code = json.ResponseCode;
+			var message = json.ResponseMsg;
+			//console.log('-----return -code= ' + code + ';message= '
+			//		+ message);
+			if (code == 200) {
+
+		
+				$scope.tabledata =json.rows[0];
+				
+				//setchartdatabledatata(json.rows);
+
+			
+					
+					$scope.$apply();
+					
+				//console.log('-----guideList -OK= ');
+
+			} else {
+				msg(message);
+			}
+
+		
+
+			//$('#refresh').removeClass('visible');
+			//$('#refresh2').removeClass('visible');
+
+		}, function error(data) {
+			msg("网络异常!");
+
+		
+		//	$("#refresh").removeClass('visible');
+			//$('#refresh2').removeClass('visible');
+
+		}, false, "json"
+
+		);
+		
+	};
 	
 	
+	$scope.getDetail = function(type,out, id, fucOnFinished, clear) {
+
+		
+		
+		
+		$scope.page = (id != null) ? id :1;
+		
+		
+		if($scope.page>$scope.pageNum)
+			$scope.page=$scope.page-1;
+		
+		if($scope.page<=0)
+			$scope.page=1;
+		
+		
+
+		var http = getImUrl();// "";
+
+		var now=new Date();
+		var before=new Date();
+		var format = "yyyy-MM-dd";
+		
+			before.setHours(0);
+			format = "yyyy-MM-dd";
+		
+		var begindate =before.Format(format);
+		var enddate = now.Format(format);
+		
+		var obj = new Object();
+		//obj.date1 = begindate;// "12345678";
+		//obj.date2 = enddate;// "12345678";
+		//obj.date_type = "DAY";
+		//obj.qName = $("#s_type ").find("option:selected").text();
+		//obj.table="item_action_log";
+		obj.qType =type;//"异常_";
+		//obj.item_id=$("#item_id").val();
+		
+		
+		obj.page = $scope.page;// 1;// "12345678";
+		obj.rows = $scope.rows;// 10;// "12345678";
+		SZUMWS(http + "public/nowdata.action", JSON
+				.stringify(obj), function succsess(json) {
+			// var json = JSON.parse(decryData);
+			var code = json.ResponseCode;
+			var message = json.ResponseMsg;
+			//console.log('-----return -code= ' + code + ';message= '
+			//		+ message);
+			if (code == 200) {
+
+		
+				var list=eval(json.rows);
+				
+				
+				
+				
+				if(out==1){
+					$scope.tododata.total=list.length;
+				}
+					
+				if(out==2)
+					$scope.tododata.yujing=list.length;;
+				if(out==3)
+					$scope.tododata.gaojing=list.length;;
+				
+				if(out==4)
+					$scope.tododata.lixian=list.length;;
+				
+				
+
+				
+				//setchartdatabledatata(json.rows);
+
+			
+					
+					$scope.$apply();
+					
+				//console.log('-----guideList -OK= ');
+
+			} else {
+				msg(message);
+			}
+
+		
+
+			//$('#refresh').removeClass('visible');
+			//$('#refresh2').removeClass('visible');
+
+		}, function error(data) {
+			msg("网络异常!");
+
+		
+		//	$("#refresh").removeClass('visible');
+			//$('#refresh2').removeClass('visible');
+
+		}, false, "json"
+
+		);
+		
+	};
+	$scope.tododata={};
+	$scope.getDetail("异常_",1);
+	$scope.getDetail("异常_预警",2);
+	$scope.getDetail("异常_告警",3);
+	$scope.getDetail("异常_离线",4);
 	
-	
-	
-	
-	
+	$scope.todo=function(index){
+		
+		window.location.href=basePath+"/public/todo/?type="+index;
+	};
 	
 	
 	$scope.getChartList = function(id, fucOnFinished, clear) {
@@ -232,8 +523,69 @@ function init() {
 	initDetailTable();
 	
 
+	inittime();
 	
-	$.each($(".time").find("span"),function(index,item){
+	inittime2();
+	
+	
+		
+};
+
+
+function inittime2(){
+$.each($(".time2").find("span"),function(index,item){
+		
+		$(item).click(function(){
+			$(".time2 span").removeClass("select");
+			$(item).addClass("select");
+			
+			if($(item).html()=="今天")
+				$("#h_dateType").val("DAY");
+			else if($(item).html()=="本月")
+				$("#h_dateType").val("MONTH");
+			else
+				$("#h_dateType").val("DAY");
+			
+			
+			var datetype = $(item).html();
+			var now=new Date();
+			var before=new Date();
+			var format = "yyyy-MM-dd HH";
+			if (datetype == "今天")
+				{
+				before.setHours(0);
+				format = "yyyy-MM-dd";
+				}
+				
+			else if (datetype == "本周")
+				{
+				before.setDate(before.getDate()- ((before.getDay()==0)?7:before.getDay())+1);
+				format = "yyyy-MM-dd";
+				}
+				
+			else if (datetype == "本月")
+				{
+				before.setMonth(now.getMonth());
+				format = "yyyy-MM";
+				}
+				
+
+			var begindate =before.Format(format);
+			var enddate = now.Format(format);
+			
+			$("#h_effectDate").val(begindate);
+			$("#h_effectDate2").val(enddate);
+			
+			getChartTable();
+		});
+		
+		
+	});
+$(".time2").find(".select").trigger("click");
+}
+
+function inittime(){
+$.each($(".time").find("span"),function(index,item){
 		
 		$(item).click(function(){
 			$(".time span").removeClass("select");
@@ -242,7 +594,7 @@ function init() {
 			if($(item).html()=="今天")
 				$("#dateType").val("HOUR");
 			else if($(item).html()=="本月")
-				$("#dateType").val("MONTH");
+				$("#dateType").val("DAY");
 			else
 				$("#dateType").val("DAY");
 			
@@ -259,14 +611,14 @@ function init() {
 				
 			else if (datetype == "本周")
 				{
-				before.setDate(before.getDate()-10);
+				before.setDate(before.getDate()- ((before.getDay()==0)?7:before.getDay())+1);
 				format = "yyyy-MM-dd";
 				}
 				
 			else if (datetype == "本月")
 				{
-				before.setMonth(now.getMonth());
-				format = "yyyy-MM";
+				before.setDate(0);//(before.getDate()-20);
+				format = "yyyy-MM-dd";
 				}
 				
 
@@ -281,12 +633,8 @@ function init() {
 		
 		
 	});
-	
-	$(".time").find(".select").trigger("click");
-		
-	
-
-};
+$(".time").find(".select").trigger("click");
+}
 
 var cdate="2018-06-21";
 var type="";
@@ -323,6 +671,9 @@ function initDetailTable() {
         formatNoMatches: function(){
             return "今天很安静，没有发生任何情况";
           },
+          formatLoadingMessage: function(){
+              return "";
+          },
         queryParams: function queryParams(params) { // 设置查询参数
         	
         	var rows= params.limit; // 每页要显示的数据条数
@@ -331,6 +682,27 @@ function initDetailTable() {
            
         	var page=1+ offset/rows;
      
+        	
+        	var now=new Date();
+			var before=new Date();
+			var format = "yyyy-MM-dd HH";
+			
+				before.setHours(0);
+				format = "yyyy-MM-dd HH";
+			
+			var begindate =before.Format(format);
+			var enddate = now.Format(format);
+			
+			
+			
+
+			var http = getImUrl();// "";
+
+			var obj = new Object();
+			obj.date1 = begindate;// "12345678";
+			obj.date2 = enddate;// "12345678";
+        	
+        	
             var param = {
             		rows: params.limit, // 每页要显示的数据条数
                 offset: params.offset, // 每页显示数据的开始行号
@@ -338,9 +710,10 @@ function initDetailTable() {
                 sort: params.sort, // 要排序的字段
              
                 qType :"异常_",//$("#s_type").val(),
-                date_type : "DAY",//$("#dateType").val(),
+                date_type : "HOUR",//$("#dateType").val(),
                
-                date:cdate,
+                date1:begindate,
+                date2:enddate
                
             };
             return param;
@@ -360,7 +733,7 @@ function initDetailTable() {
             align: 'left',
             valign: 'middle',
             formatter:function(value,row,index){
-            	return  '<img class="rimg img-responsive" src="'+basePath+"/images/hjgz/see.png"+'">'+row.itemname+','+row.type_second;
+            	return  '<img class="rimg small img-responsive" src="'+basePath+"/images/hjgz/see.png"+'">'+row.itemname+','+row.type_second;
             }
         },
         
@@ -379,8 +752,11 @@ function modifyAndDeleteButton(value,row,index){
 	return " <img id='see' class='rimg img-responsive'  src='"+basePath+"/images/hjgz/detail.png"+"'>";
 }
 window.PersonnelInformationEvents={
- "img #see":function(){
-	 info("ddd");
+ "click #see":function(item,v,row){
+	// info("ddd");
+		//$scope.showdetail=function(item){
+			window.location.href=basePath+"/public/detail/?id="+row.item_id;
+		//}
  },
  }
 

@@ -161,6 +161,32 @@
 		<url-pattern>/public/index/</url-pattern>
 	</servlet-mapping> 
 	
+	   <servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/public/stastic/</url-pattern>
+	</servlet-mapping> 
+	
+	    <servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/public/now/</url-pattern>
+	</servlet-mapping> 
+	
+	     <servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/public/list/</url-pattern>
+	</servlet-mapping> 
+	
+	     	     <servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/public/detail/</url-pattern>
+	</servlet-mapping> 
+	     
+	     	     <servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/public/todo/</url-pattern>
+	</servlet-mapping> 
+	     
+	
     <servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
 		<url-pattern>/page/set/</url-pattern>

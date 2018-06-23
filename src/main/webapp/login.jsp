@@ -182,6 +182,7 @@
 				<p style="margin-top: 4px; color: #333;">
 					@Copyright 2017</p>
 			</div>
+<script type="text/javascript" src="${basePath}/js/plugin/jquery/jquery-ui.js"></script>
 
 			<script type="text/javascript" src="${basePath}/js/plugin/angular/angular.min.js"></script>
 

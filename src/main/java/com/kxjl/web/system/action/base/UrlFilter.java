@@ -23,7 +23,7 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.config.ConfigReader;
-import com.kxjl.web.blog.service.BlogService;
+
 import com.kxjl.web.system.model.MenuInfo;
 import com.kxjl.web.system.model.SysUserBean;
 import com.kxjl.web.system.model.SysUserBean.UserType;
@@ -33,8 +33,6 @@ public class UrlFilter implements Filter {
 
 	public FilterConfig config;
 
-	@Autowired
-	BlogService blogService;
 
 	private static Logger logger = Logger.getLogger(PageFilter.class);
 

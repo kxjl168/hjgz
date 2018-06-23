@@ -53,7 +53,7 @@
 				<span class="sr-only"></span><span
 					class="hide glyphicon glyphicon-search   "></span><span class=" hide icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="http://256kb.cn">KxのBook</a>
+			<a class="navbar-brand" href=""></a>
 		</div>
 		<div class="collapse navbar-collapse" id="menuItem"></div>
 		</nav>
@@ -85,7 +85,7 @@
 		style="width: 100%; height: 34px; background: #e6edf0; position: relative; z-index: 999999; text-align: center; padding-top: 1px; border-top: 1px solid #fff; position: fixed; bottom: 0;">
 		
 		<p style=" color: #333;">
-			KxのBook@Copyright 2017  All Rights Reserved </p>
+		 </p>
 	</div>
 
 

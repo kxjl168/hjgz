@@ -6,7 +6,7 @@
 			<button type="button" id="menuBtn" class="navbar-toggle"
 				data-toggle="collapse" data-target="#menuItem">
 				<span class="sr-only"></span> <span
-					class="glyphicon glyphicon-tasks  "></span> <span class="icon-bar"></span>
+					class="fa fa-bars  "></span> <span class="icon-bar"></span>
 			</button>
 		
 			<a id="toptitle" class="mobile navbar-brand  toptitle " href="#" ng-cloak>环境感知系统</a>

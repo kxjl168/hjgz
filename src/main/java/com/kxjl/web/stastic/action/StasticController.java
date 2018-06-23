@@ -42,8 +42,6 @@ import com.kxjl.tool.utils.StringUtil;
 import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.system.model.DictInfo;
 
-
-
 /**
  * 统计接口
  * 
@@ -55,16 +53,15 @@ import com.kxjl.web.system.model.DictInfo;
 public class StasticController extends BaseController {
 	@Autowired
 	private StasticService stasticService;
-	
+
 	@Autowired
 	private VisitDataMapper visitDao;
 
-/*	@Autowired
-	private ConsultingAppealingService complaintService;
-
-	@Autowired
-	private AppInfoService appInfoService;
-*/
+	/*
+	 * @Autowired private ConsultingAppealingService complaintService;
+	 * 
+	 * @Autowired private AppInfoService appInfoService;
+	 */
 	private Logger logger = Logger.getLogger(StasticController.class);
 
 	/**
@@ -159,11 +156,12 @@ public class StasticController extends BaseController {
 		ModelAndView view = new ModelAndView();
 		view.setViewName("/stastic/hour");
 
-		/*AppInfo query = new AppInfo();
-		query.setPage(1);
-		query.setPageCount(1000);
-		List<AppInfo> apps = appInfoService.getAppInfoPageList(query);
-		view.addObject("appInfos", apps);*/
+		/*
+		 * AppInfo query = new AppInfo(); query.setPage(1);
+		 * query.setPageCount(1000); List<AppInfo> apps =
+		 * appInfoService.getAppInfoPageList(query); view.addObject("appInfos",
+		 * apps);
+		 */
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String cur_date = format.format(new Date());
@@ -187,11 +185,12 @@ public class StasticController extends BaseController {
 		ModelAndView view = new ModelAndView();
 		view.setViewName("/stastic/appservice_info");
 
-		/*AppInfo query = new AppInfo();
-		query.setPage(1);
-		query.setPageCount(1000);
-		List<AppInfo> apps = appInfoService.getAppInfoPageList(query);
-		view.addObject("appInfos", apps);*/
+		/*
+		 * AppInfo query = new AppInfo(); query.setPage(1);
+		 * query.setPageCount(1000); List<AppInfo> apps =
+		 * appInfoService.getAppInfoPageList(query); view.addObject("appInfos",
+		 * apps);
+		 */
 
 		// SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		// String cur_date = format.format(new Date());
@@ -200,10 +199,6 @@ public class StasticController extends BaseController {
 		return view;
 	}
 
-	
-
-	
-	
 	/**
 	 * 页面-获取用户全局访问统计
 	 * 
@@ -216,8 +211,7 @@ public class StasticController extends BaseController {
 			HttpServletResponse response) throws Exception {
 
 		// 返回输出报文
-		List<HashMap<Object, Object>> infos = GetUserVisitData(request,
-				false);
+		List<HashMap<Object, Object>> infos = GetUserVisitData(request, false);
 
 		List<HashMap<Object, Object>> infosTotal = GetUserVisitData(request,
 				true);
@@ -231,8 +225,7 @@ public class StasticController extends BaseController {
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
-	
-	
+
 	/**
 	 * 获取用户使用全局统计情况
 	 * 
@@ -242,34 +235,31 @@ public class StasticController extends BaseController {
 	 * @author zj
 	 */
 	@RequestMapping(value = "/GetRecentVisitData")
-	public void GetRecentVisitData(
-			HttpServletRequest request,HttpServletResponse response ) {
-	
+	public void GetRecentVisitData(HttpServletRequest request,
+			HttpServletResponse response) {
+
 		try {
 
-			 Date now=new Date();
-			 Date y= DateUtils.addDays(now,-1);
+			Date now = new Date();
+			Date y = DateUtils.addDays(now, -1);
 			// 返回输出报文
-			String dateY=DateUtil.getDateStr(y, "yyyy-MM-dd");
-			String dateN=DateUtil.getDateStr(now, "yyyy-MM-dd");
-			VisitData vY= visitDao.selectByPrimaryKey(dateY);
-			VisitData vN= visitDao.selectByPrimaryKey(dateN);
-			
-			Gson g=new Gson();
-			String rst = "{\"ResponseCode\":200, \"y\":" +g.toJson(vY) + ",\"n\":" + g.toJson(vN)
-					+ "}";
+			String dateY = DateUtil.getDateStr(y, "yyyy-MM-dd");
+			String dateN = DateUtil.getDateStr(now, "yyyy-MM-dd");
+			VisitData vY = visitDao.selectByPrimaryKey(dateY);
+			VisitData vN = visitDao.selectByPrimaryKey(dateN);
+
+			Gson g = new Gson();
+			String rst = "{\"ResponseCode\":200, \"y\":" + g.toJson(vY)
+					+ ",\"n\":" + g.toJson(vN) + "}";
 
 			JsonUtil.responseOutWithJson(response, rst);
-			
+
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
 
-	
 	}
-	
-	
-	
+
 	/**
 	 * 获取用户使用全局统计情况
 	 * 
@@ -288,7 +278,6 @@ public class StasticController extends BaseController {
 		String date1 = request.getParameter("date1");
 		String date2 = request.getParameter("date2");
 
-
 		String age1 = "";
 		String age2 = "";
 		if (!age.equals("")) {
@@ -297,10 +286,10 @@ public class StasticController extends BaseController {
 		}
 
 		String appNames = request.getParameter("appNames");
-		//String appIDs = request.getParameter("appIDs");
+		// String appIDs = request.getParameter("appIDs");
 
 		String[] StrAppNames = appNames.split(",");
-		//String[] StrAppIDs = appIDs.split(",");
+		// String[] StrAppIDs = appIDs.split(",");
 
 		int pageCount = Integer.parseInt(request.getParameter("rows"));// request.getParameter("pageCount");
 		int curPage = Integer.parseInt(request.getParameter("page"));
@@ -315,8 +304,9 @@ public class StasticController extends BaseController {
 
 			// 返回输出报文
 
-			infos = stasticService.GetUserVisitRecondList
-					(name, sex, age1, age2, StrAppNames, date_type, date1, date2,(curPage - 1) * pageCount,pageCount);
+			infos = stasticService.GetUserVisitRecondList(name, sex, age1,
+					age2, StrAppNames, date_type, date1, date2, (curPage - 1)
+							* pageCount, pageCount);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -324,10 +314,9 @@ public class StasticController extends BaseController {
 		return infos;
 
 	}
-	
+
 	/**
-	 * 用户访问统计
-	 * 数据导出
+	 * 用户访问统计 数据导出
 	 * 
 	 * @param request
 	 * @param response
@@ -343,26 +332,26 @@ public class StasticController extends BaseController {
 
 		String appNames = request.getParameter("appNames");
 		String[] StrAppNames = appNames.split(",");
-		
+
 		List<String[]> xlsInputs = new ArrayList<String[]>();
-		String[] row_head = new String[StrAppNames.length+2];
-		row_head[0]="用户";
-		row_head[1]="时间";
+		String[] row_head = new String[StrAppNames.length + 2];
+		row_head[0] = "用户";
+		row_head[1] = "时间";
 		for (int i = 2; i < row_head.length; i++) {
-			row_head[i]=StrAppNames[i-2];
+			row_head[i] = StrAppNames[i - 2];
 		}
-	
+
 		xlsInputs.add(row_head);
 
 		for (int i = 0; i < infos.size(); i++) {
 			String[] row = new String[row_head.length];
 			for (int j = 0; j < row_head.length; j++) {
-				if(j==0)
-				row[j]=String.valueOf( infos.get(i).get("name"));
-				else if(j==1)
-					row[j]=String.valueOf( infos.get(i).get("hour"));
+				if (j == 0)
+					row[j] = String.valueOf(infos.get(i).get("name"));
+				else if (j == 1)
+					row[j] = String.valueOf(infos.get(i).get("hour"));
 				else
-				row[j]=String.valueOf( infos.get(i).get(row_head[j]));
+					row[j] = String.valueOf(infos.get(i).get(row_head[j]));
 			}
 
 			xlsInputs.add(row);
@@ -389,8 +378,7 @@ public class StasticController extends BaseController {
 		}
 
 	}
-	
-	
+
 	/**
 	 * 页面-获取用户使用服务情况
 	 * 
@@ -403,8 +391,7 @@ public class StasticController extends BaseController {
 			HttpServletResponse response) throws Exception {
 
 		// 返回输出报文
-		List<HashMap<Object, Object>> infos = GetUserAppUseData(request,
-				false);
+		List<HashMap<Object, Object>> infos = GetUserAppUseData(request, false);
 
 		List<HashMap<Object, Object>> infosTotal = GetUserAppUseData(request,
 				true);
@@ -418,7 +405,7 @@ public class StasticController extends BaseController {
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
-	
+
 	/**
 	 * 获取用户使用应用服务情况
 	 * 
@@ -437,7 +424,6 @@ public class StasticController extends BaseController {
 		String date1 = request.getParameter("date1");
 		String date2 = request.getParameter("date2");
 
-
 		String age1 = "";
 		String age2 = "";
 		if (!age.equals("")) {
@@ -446,10 +432,10 @@ public class StasticController extends BaseController {
 		}
 
 		String appNames = request.getParameter("appNames");
-		//String appIDs = request.getParameter("appIDs");
+		// String appIDs = request.getParameter("appIDs");
 
 		String[] StrAppNames = appNames.split(",");
-		//String[] StrAppIDs = appIDs.split(",");
+		// String[] StrAppIDs = appIDs.split(",");
 
 		int pageCount = Integer.parseInt(request.getParameter("rows"));// request.getParameter("pageCount");
 		int curPage = Integer.parseInt(request.getParameter("page"));
@@ -464,8 +450,9 @@ public class StasticController extends BaseController {
 
 			// 返回输出报文
 
-			infos = stasticService.GetUserAppuseRecondList
-					(name, sex, age1, age2, StrAppNames, date_type, date1, date2,(curPage - 1) * pageCount,pageCount);
+			infos = stasticService.GetUserAppuseRecondList(name, sex, age1,
+					age2, StrAppNames, date_type, date1, date2, (curPage - 1)
+							* pageCount, pageCount);
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -473,7 +460,7 @@ public class StasticController extends BaseController {
 		return infos;
 
 	}
-	
+
 	/**
 	 * 用户使用应用数据导出
 	 * 
@@ -491,26 +478,26 @@ public class StasticController extends BaseController {
 
 		String appNames = request.getParameter("appNames");
 		String[] StrAppNames = appNames.split(",");
-		
+
 		List<String[]> xlsInputs = new ArrayList<String[]>();
-		String[] row_head = new String[StrAppNames.length+2];
-		row_head[0]="用户";
-		row_head[1]="时间";
+		String[] row_head = new String[StrAppNames.length + 2];
+		row_head[0] = "用户";
+		row_head[1] = "时间";
 		for (int i = 2; i < row_head.length; i++) {
-			row_head[i]=StrAppNames[i-2];
+			row_head[i] = StrAppNames[i - 2];
 		}
-	
+
 		xlsInputs.add(row_head);
 
 		for (int i = 0; i < infos.size(); i++) {
 			String[] row = new String[row_head.length];
 			for (int j = 0; j < row_head.length; j++) {
-				if(j==0)
-				row[j]=String.valueOf( infos.get(i).get("name"));
-				else if(j==1)
-					row[j]=String.valueOf( infos.get(i).get("hour"));
+				if (j == 0)
+					row[j] = String.valueOf(infos.get(i).get("name"));
+				else if (j == 1)
+					row[j] = String.valueOf(infos.get(i).get("hour"));
 				else
-				row[j]=String.valueOf( infos.get(i).get(row_head[j]));
+					row[j] = String.valueOf(infos.get(i).get(row_head[j]));
 			}
 
 			xlsInputs.add(row);
@@ -537,7 +524,7 @@ public class StasticController extends BaseController {
 		}
 
 	}
-	
+
 	/**
 	 * 页面-获取用户关注服务情况
 	 * 
@@ -589,15 +576,14 @@ public class StasticController extends BaseController {
 		}
 
 		String appNames = request.getParameter("appNames");
-		
+
 		try {
-			appNames=URLDecoder.decode(appNames,"ios-");
+			appNames = URLDecoder.decode(appNames, "ios-");
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 		String appIDs = request.getParameter("appIDs");
 
 		String[] StrAppNames = appNames.split(",");
@@ -643,33 +629,33 @@ public class StasticController extends BaseController {
 		List<HashMap<Object, Object>> infos = GetUserFocusAppData(request, true);
 
 		String appNames = request.getParameter("appNames");
-		
+
 		try {
-			appNames=URLDecoder.decode(appNames,"utf-8");
-			logger.error("exportUserFoucsInfo:"+appNames);
+			appNames = URLDecoder.decode(appNames, "utf-8");
+			logger.error("exportUserFoucsInfo:" + appNames);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		String[] StrAppNames = appNames.split(",");
-		
+
 		List<String[]> xlsInputs = new ArrayList<String[]>();
-		String[] row_head = new String[StrAppNames.length+1];
-		row_head[0]="用户";
+		String[] row_head = new String[StrAppNames.length + 1];
+		row_head[0] = "用户";
 		for (int i = 1; i < row_head.length; i++) {
-			row_head[i]=StrAppNames[i-1];
+			row_head[i] = StrAppNames[i - 1];
 		}
-	
+
 		xlsInputs.add(row_head);
 
 		for (int i = 0; i < infos.size(); i++) {
 			String[] row = new String[row_head.length];
 			for (int j = 0; j < row_head.length; j++) {
-				if(j==0)
-				row[j]=String.valueOf( infos.get(i).get("name"));
+				if (j == 0)
+					row[j] = String.valueOf(infos.get(i).get("name"));
 				else
-				row[j]=String.valueOf( infos.get(i).get(row_head[j]));
+					row[j] = String.valueOf(infos.get(i).get(row_head[j]));
 			}
 
 			xlsInputs.add(row);
@@ -697,8 +683,6 @@ public class StasticController extends BaseController {
 
 	}
 
-	
-
 	/**
 	 * 投诉数据导出
 	 * 
@@ -712,72 +696,45 @@ public class StasticController extends BaseController {
 	public void exportComplaintInfo(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 
-		//List<ConsultingAppealing> infos = getComplaintData(request, true);
+		// List<ConsultingAppealing> infos = getComplaintData(request, true);
 
-		/*List<String[]> xlsInputs = new ArrayList<String[]>();
-		String[] row_head = new String[11];
-		row_head[0] = "查询编号";
-		row_head[1] = "用户";
-		row_head[2] = "发布时间";
-		row_head[3] = "类型";
-		row_head[4] = "受理部门";
-		row_head[5] = "标题";
-		row_head[6] = "内容";
-		row_head[7] = "回复时间";
-		row_head[8] = "回复部门";
-		row_head[9] = "回复内容";
-		row_head[10] = "用户满意度";
-
-		xlsInputs.add(row_head);
-
-		for (int i = 0; i < infos.size(); i++) {
-			String[] row = new String[11];
-			row[0] = infos.get(i).getRANDOMSERIAL();
-			row[1] = infos.get(i).getName();
-			row[2] = infos.get(i).getPub_date();
-			row[3] = infos.get(i).getTypename();
-			row[4] = infos.get(i).getDepartmentname();
-			row[5] = infos.get(i).getTitle();
-			row[6] = infos.get(i).getContent();
-			row[7] = infos.get(i).getBack_date();
-			row[8] = infos.get(i).getBack_name();
-			row[9] = infos.get(i).getBack_content();
-			
-			String result= infos.get(i).getCp_result();
-			if(result==null)
-			row[10] = "";
-			else if(result.equals("0"))
-				row[10] = "满意";
-			else if(result.equals("1"))
-				row[10] = "一般";
-			else if(result.equals("2"))
-				row[10] = "不满意";
-			xlsInputs.add(row);
-		}
-
-		try {
-			HSSFWorkbook wb = FileUtil.createPauseDataDetailExcel(xlsInputs);
-			if (wb != null) {
-				response.setCharacterEncoding("UTF-8");
-				response.setContentType("application/ms-excel");
-				response.setHeader(
-						"Content-Disposition",
-						"attachment;filename=" + "complaint_"
-								+ DateUtil.getNowStr("yyyyMMddHHmmss") + ".xls");// mod
-																					// by
-
-				ServletOutputStream out = response.getOutputStream();
-				wb.write(out);
-				out.close();
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-*/
+		/*
+		 * List<String[]> xlsInputs = new ArrayList<String[]>(); String[]
+		 * row_head = new String[11]; row_head[0] = "查询编号"; row_head[1] = "用户";
+		 * row_head[2] = "发布时间"; row_head[3] = "类型"; row_head[4] = "受理部门";
+		 * row_head[5] = "标题"; row_head[6] = "内容"; row_head[7] = "回复时间";
+		 * row_head[8] = "回复部门"; row_head[9] = "回复内容"; row_head[10] = "用户满意度";
+		 * 
+		 * xlsInputs.add(row_head);
+		 * 
+		 * for (int i = 0; i < infos.size(); i++) { String[] row = new
+		 * String[11]; row[0] = infos.get(i).getRANDOMSERIAL(); row[1] =
+		 * infos.get(i).getName(); row[2] = infos.get(i).getPub_date(); row[3] =
+		 * infos.get(i).getTypename(); row[4] =
+		 * infos.get(i).getDepartmentname(); row[5] = infos.get(i).getTitle();
+		 * row[6] = infos.get(i).getContent(); row[7] =
+		 * infos.get(i).getBack_date(); row[8] = infos.get(i).getBack_name();
+		 * row[9] = infos.get(i).getBack_content();
+		 * 
+		 * String result= infos.get(i).getCp_result(); if(result==null) row[10]
+		 * = ""; else if(result.equals("0")) row[10] = "满意"; else
+		 * if(result.equals("1")) row[10] = "一般"; else if(result.equals("2"))
+		 * row[10] = "不满意"; xlsInputs.add(row); }
+		 * 
+		 * try { HSSFWorkbook wb =
+		 * FileUtil.createPauseDataDetailExcel(xlsInputs); if (wb != null) {
+		 * response.setCharacterEncoding("UTF-8");
+		 * response.setContentType("application/ms-excel"); response.setHeader(
+		 * "Content-Disposition", "attachment;filename=" + "complaint_" +
+		 * DateUtil.getNowStr("yyyyMMddHHmmss") + ".xls");// mod // by
+		 * 
+		 * ServletOutputStream out = response.getOutputStream(); wb.write(out);
+		 * out.close(); }
+		 * 
+		 * } catch (Exception e) { e.printStackTrace(); }
+		 */
 	}
 
-	
 	@RequestMapping(value = "/getTypeInfoList")
 	public void getTypeInfoList(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -798,11 +755,7 @@ public class StasticController extends BaseController {
 
 			jsonIN = new JSONObject(data);
 
-		
-	
 			List<DictInfo> infos = stasticService.GetStaticTypeList();
-					
-			
 
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(infos);
@@ -830,17 +783,17 @@ public class StasticController extends BaseController {
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
-	
-	
+
 	/**
 	 * 获取分类下的具体点击数据-链接文章
+	 * 
 	 * @param request
 	 * @param response
 	 * @author zj
 	 * @date 2018年6月14日
 	 */
-	@RequestMapping(value = "/GetActionList")
-	public void  GetActionList(HttpServletRequest request,
+	@RequestMapping(value = "/GetStaticData")
+	public void GetStaticData(HttpServletRequest request,
 			HttpServletResponse response) {
 		// String blogid = request.getParameter("blogid");
 
@@ -850,78 +803,84 @@ public class StasticController extends BaseController {
 		 * Integer.parseInt(request.getParameter("page"));
 		 */
 
-		
 		JSONObject jsonIN;
 		JSONObject jsonOut = new JSONObject();
 
 		String rst = "";
 		try {
 
-			
-
 			String time_type = request.getParameter("date_type");
-			String date1 = request.getParameter("date");
-			//String date2 = request.getParameter("date2");
+			String date1 = request.getParameter("date1");
+			String date2 = request.getParameter("date2");
 
 			String qName = request.getParameter("qName");
 			String qType = request.getParameter("qType");
-			String userid=request.getParameter("userid");
+			String userid = request.getParameter("userid");
 
+			String otable = request.getParameter("table");
+
+			String item_id=request.getParameter("item_id");
+			
 			String type1 = qType.substring(0, qType.lastIndexOf("_"));
 			String type2 = qType.substring(qType.lastIndexOf("_") + 1,
 					qType.length());
 
-			int pageCount =30;
-			int curPage =1;
+			int pageCount = 30;
+			int curPage = 1;
 			try {
-				 pageCount = Integer.parseInt(request.getParameter("rows"));// request.getParameter("pageCount");
-				 curPage = Integer.parseInt(request.getParameter("page"));
-		
+				pageCount = Integer.parseInt(request.getParameter("rows"));// request.getParameter("pageCount");
+				curPage = Integer.parseInt(request.getParameter("page"));
+
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-			
-			
-			String dateFormat="%Y-%m-%d %H";
-			if(time_type.equals("HOUR"))
-				 dateFormat="%Y-%m-%d %H";
-			else if(time_type.equals("DAY"))
-				 dateFormat="%Y-%m-%d";
-			else  if(time_type.equals("MONTH"))
-				 dateFormat="%Y-%m";
-			
-			ActionLog aquery=new ActionLog();
+
+			String table = "item_action_hour";
+			String dateFormat = "%Y-%m-%d %H";
+			if (time_type.equals("HOUR"))
+				dateFormat = "%Y-%m-%d %H";
+			else if (time_type.equals("DAY")) {
+				dateFormat = "%Y-%m-%d";
+				table = "item_action_day";
+			} else if (time_type.equals("MONTH")) {
+				dateFormat = "%Y-%m";
+				table = "item_action_month";
+			}
+			if (otable != null && !otable.equals(""))
+				table=otable;
+
+			ActionLog aquery = new ActionLog();
 			aquery.setTime1(date1);
-			//aquery.setTime2(date2);
+			aquery.setTime2(date2);
 			aquery.setDateFormat(dateFormat);
 			aquery.setType_first(type1);
 			aquery.setType_second(type2);
 			aquery.setPage(curPage);
 			aquery.setPageCount(pageCount);
 			aquery.setUserid(userid);
-			
-			
-			List<ActionLog> infos =new ArrayList<>();
-			int total=0;
-			if(!date1.equals(""))
-			{
-			 infos = stasticService.GetActionList(aquery);
-			 total = stasticService.GetActionListCount(aquery);
+			aquery.setTable(table);
+			aquery.setItem_id(item_id);
+
+			List<ActionLog> infos = new ArrayList<>();
+			int total = 0;
+			if (!date1.equals("")) {
+				if (otable != null && !otable.equals(""))
+					infos = stasticService.GetStaticDataNow(aquery);
+				else
+					infos = stasticService.GetStaticData(aquery);
+
 			}
-			
-			
 
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(infos);
 
 			jsonOut.put("ResponseCode", "200");
 			jsonOut.put("ResponseMsg", "");
-			jsonOut.put("total", total);
-			jsonOut.put("rows",  new JSONArray(jsStr));
+			jsonOut.put("rows", new JSONArray(jsStr));
 
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
-			//e.printStackTrace();
+			// e.printStackTrace();
 
 			try {
 				jsonOut.put("ResponseCode", "201");
@@ -935,11 +894,114 @@ public class StasticController extends BaseController {
 		}
 		rst = jsonOut.toString();
 		JsonUtil.responseOutWithJson(response, rst);
-		
-		//return rst;
+
+		// return rst;
 
 	}
-	
+
+	/**
+	 * 获取分类下的具体点击数据-链接文章
+	 * 
+	 * @param request
+	 * @param response
+	 * @author zj
+	 * @date 2018年6月14日
+	 */
+	@RequestMapping(value = "/GetActionList")
+	public void GetActionList(HttpServletRequest request,
+			HttpServletResponse response) {
+		// String blogid = request.getParameter("blogid");
+
+		/*
+		 * int pageCount = Integer.parseInt(request.getParameter("rows"));//
+		 * request.getParameter("pageCount"); int curPage =
+		 * Integer.parseInt(request.getParameter("page"));
+		 */
+
+		JSONObject jsonIN;
+		JSONObject jsonOut = new JSONObject();
+
+		String rst = "";
+		try {
+
+			String time_type = request.getParameter("date_type");
+			String date1 = request.getParameter("date1");
+			String date2 = request.getParameter("date2");
+
+			String qName = request.getParameter("qName");
+			String qType = request.getParameter("qType");
+			String userid = request.getParameter("userid");
+			String item_id = request.getParameter("item_id");
+
+			String type1 = qType.substring(0, qType.lastIndexOf("_"));
+			String type2 = qType.substring(qType.lastIndexOf("_") + 1,
+					qType.length());
+
+			int pageCount = 30;
+			int curPage = 1;
+			try {
+				pageCount = Integer.parseInt(request.getParameter("rows"));// request.getParameter("pageCount");
+				curPage = Integer.parseInt(request.getParameter("page"));
+
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+			String dateFormat = "%Y-%m-%d %H";
+			if (time_type.equals("HOUR"))
+				dateFormat = "%Y-%m-%d %H";
+			else if (time_type.equals("DAY"))
+				dateFormat = "%Y-%m-%d";
+			else if (time_type.equals("MONTH"))
+				dateFormat = "%Y-%m";
+
+			ActionLog aquery = new ActionLog();
+			aquery.setTime1(date1);
+			aquery.setTime2(date2);
+			aquery.setDateFormat(dateFormat);
+			aquery.setType_first(type1);
+			aquery.setType_second(type2);
+			aquery.setPage(curPage);
+			aquery.setPageCount(pageCount);
+			aquery.setUserid(userid);
+			aquery.setItem_id(item_id);
+
+			List<ActionLog> infos = new ArrayList<>();
+			int total = 0;
+			if (!date1.equals("")) {
+				infos = stasticService.GetActionList(aquery);
+				total = stasticService.GetActionListCount(aquery);
+			}
+
+			Gson gs = new Gson();
+			String jsStr = gs.toJson(infos);
+
+			jsonOut.put("ResponseCode", "200");
+			jsonOut.put("ResponseMsg", "");
+			jsonOut.put("total", total);
+			jsonOut.put("rows", new JSONArray(jsStr));
+
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+
+			try {
+				jsonOut.put("ResponseCode", "201");
+				jsonOut.put("ResponseMsg", "");
+				jsonOut.put("total", 0);
+				jsonOut.put("rows", "");
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+
+		}
+		rst = jsonOut.toString();
+		JsonUtil.responseOutWithJson(response, rst);
+
+		// return rst;
+
+	}
+
 	/**
 	 * 时间段、点击详细（地市分布、数量）
 	 * 
@@ -959,18 +1021,15 @@ public class StasticController extends BaseController {
 		 * Integer.parseInt(request.getParameter("page"));
 		 */
 
-		
 		JSONObject jsonIN;
 		JSONObject jsonOut = new JSONObject();
 
 		String rst = "";
 		try {
 
-			
-
 			String time_type = request.getParameter("date_type");
 			String date1 = request.getParameter("date");
-			//String date2 = request.getParameter("date2");
+			// String date2 = request.getParameter("date2");
 
 			String qName = request.getParameter("qName");
 			String qType = request.getParameter("qType");
@@ -981,30 +1040,26 @@ public class StasticController extends BaseController {
 
 			int pageCount = Integer.parseInt(request.getParameter("rows"));// request.getParameter("pageCount");
 			int curPage = Integer.parseInt(request.getParameter("page"));
-	
-			
-			String dateFormat="%Y-%m-%d %H";
-			if(time_type.equals("HOUR"))
-				 dateFormat="%Y-%m-%d %H";
-			else if(time_type.equals("DAY"))
-				 dateFormat="%Y-%m-%d";
-			else  if(time_type.equals("MONTH"))
-				 dateFormat="%Y-%m";
-			
-			ActionLog aquery=new ActionLog();
+
+			String dateFormat = "%Y-%m-%d %H";
+			if (time_type.equals("HOUR"))
+				dateFormat = "%Y-%m-%d %H";
+			else if (time_type.equals("DAY"))
+				dateFormat = "%Y-%m-%d";
+			else if (time_type.equals("MONTH"))
+				dateFormat = "%Y-%m";
+
+			ActionLog aquery = new ActionLog();
 			aquery.setTime1(date1);
-			//aquery.setTime2(date2);
+			// aquery.setTime2(date2);
 			aquery.setDateFormat(dateFormat);
 			aquery.setType_first(type1);
 			aquery.setType_second(type2);
 			aquery.setPage(curPage);
 			aquery.setPageCount(pageCount);
-			
-			
+
 			List<ActionLog> infos = stasticService.GetDetailList(aquery);
 			int total = stasticService.GetDetailListCount(aquery);
-					
-			
 
 			Gson gs = new Gson();
 			String jsStr = gs.toJson(infos);
@@ -1032,9 +1087,7 @@ public class StasticController extends BaseController {
 		JsonUtil.responseOutWithJson(response, rst);
 
 	}
-	
-	
-	
+
 	/**
 	 * 获取统计数据
 	 * 
@@ -1056,8 +1109,9 @@ public class StasticController extends BaseController {
 		String type1 = qType.substring(0, qType.lastIndexOf("_"));
 		String type2 = qType.substring(qType.lastIndexOf("_") + 1,
 				qType.length());
-		
-		logger.debug("date_type:"+date_type+"/qType:"+qType+"/qName:"+qName+"/date1:"+date1+"/date1:"+date1);
+
+		logger.debug("date_type:" + date_type + "/qType:" + qType + "/qName:"
+				+ qName + "/date1:" + date1 + "/date1:" + date1);
 
 		JSONObject jsonOut = new JSONObject();
 		JSONObject jsonChartData = new JSONObject();
@@ -1114,7 +1168,6 @@ public class StasticController extends BaseController {
 		String date1 = request.getParameter("date1");
 		String date2 = request.getParameter("date2");
 
-	
 		String qType = request.getParameter("qType");
 
 		String type1 = qType.substring(0, qType.lastIndexOf("_"));

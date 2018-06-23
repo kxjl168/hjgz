@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxjl.web.autodata.dao.ItemInfoMapper">
+  <resultMap id="BaseResultMap" type="com.kxjl.web.autodata.model.ItemInfo">
+    
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, type, tags, create_date, update_date, imei
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+   select i.*,newstatus.type_first,newstatus.type_second,newstatus.wendu from item_info i left join (
+select * from item_action_log log where EXISTS( 
+select * from (
+select max(id) id from item_action_log group by item_id order by action_date asc
+) max  where max.id=log.id)
+) newstatus on i.id=newstatus.item_id
+
+    where i.id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <select id="selectNowList" parameterType="com.kxjl.web.autodata.model.ItemInfo" resultMap="BaseResultMap">
+  select i.*,newstatus.type_first,newstatus.type_second,newstatus.wendu from item_info i left join (
+select * from item_action_log log where EXISTS( 
+select * from (
+select max(id) id from item_action_log group by item_id order by action_date asc
+) max  where max.id=log.id)
+) newstatus on i.id=newstatus.item_id
+
+
+    where 1=1
+    	<if test='type_second!=null and type_second!= "" '>
+ and newstatus.type_second=#{type_second}
+ </if>
+ <if test='type_first!=null and type_first!= "" '>
+ and newstatus.type_first=#{type_first}
+ </if>
+ 
+  </select>
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from item_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kxjl.web.autodata.model.ItemInfo">
+    insert into item_info (id, title, type, 
+      tags, create_date, update_date, 
+      imei)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{tags,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{imei,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kxjl.web.autodata.model.ItemInfo">
+    insert into item_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="tags != null">
+        tags,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="imei != null">
+        imei,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imei != null">
+        #{imei,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kxjl.web.autodata.model.ItemInfo">
+    update item_info
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="tags != null">
+        tags = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="imei != null">
+        imei = #{imei,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kxjl.web.autodata.model.ItemInfo">
+    update item_info
+    set title = #{title,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      imei = #{imei,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

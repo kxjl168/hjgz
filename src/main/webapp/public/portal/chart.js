@@ -37,7 +37,7 @@ function setchartdata(jdata) {
 
 			},
 			toolbox : {
-				show : true,
+				show : false,
 				feature : {
 
 					magicType : {
@@ -48,6 +48,7 @@ function setchartdata(jdata) {
 				}
 			},
 			legend : {
+				show:false,
 				data : [ '累计访问数据（pv）-9月1号', '累计访问数据（uv）-9月1号' ]
 			},
 			xAxis : {
@@ -80,10 +81,13 @@ function setchartdata(jdata) {
 				type : 'bar',
 				// stack : '总量',
 				data : [ 35, 25, 36, 10, 33, 29 ],
+				barMaxWidth :30,
 				 itemStyle: {normal: {
 			            label : {show:true,position:'top',formatter:'{c} '}
 			        }}
-			}, {
+			}
+			/*, {
+				show:false,
 				name : '累计访问数据（uv）-9月1号',
 				type : 'bar',
 				// stack : '总量',
@@ -91,21 +95,22 @@ function setchartdata(jdata) {
 				 itemStyle: {normal: {
 			            label : {show:true,position:'top',formatter:'{c} '}
 			        }}
-			} ]
+			}*/
+			]
 		};
 
 		option.xAxis.data = [];
 		option.series[0].data = [];
-		option.series[1].data = [];
+		//option.series[1].data = [];
 		option.legend.data = [];
 
 		var queryDate1 = $("#effectDate").val();
 		var queryDate2 = $("#effectDate2").val();
 
-		option.title.text = $("#idDropDownAlertType").html() + "统计";
-		option.legend.data.push('异常次数');
+		option.title.text ='';// $("#idDropDownAlertType").html() + "统计";
+		option.legend.data.push('次数');
 		//option.legend.data.push('24小时独立访问量（uv）');
-		option.series[0].name = '异常次数';
+		option.series[0].name = '次数';
 		//option.series[1].name = '24小时独立访问量（uv）';
 
 		if (jdata.length != 0) {

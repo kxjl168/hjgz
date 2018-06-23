@@ -32,14 +32,13 @@ import com.kxjl.tool.html.CharResponseWrapper;
 import com.kxjl.tool.html.FileProcessor;
 import com.kxjl.tool.utils.DateUtil;
 import com.kxjl.tool.utils.IPUtils;
-import com.kxjl.web.blog.model.Blog;
-import com.kxjl.web.blog.service.BlogService;
+
 import com.kxjl.web.stastic.model.ActionLog;
 import com.kxjl.web.stastic.service.StasticService;
 import com.kxjl.web.system.model.MenuInfo;
 import com.kxjl.web.system.model.SysUserBean;
 import com.kxjl.web.system.model.SysUserBean.UserType;
-import com.kxjl.web.system.service.CommonService;
+
 import com.kxjl.web.system.service.MenuInfoService;
 
 public class PageFilter implements Filter {
@@ -49,11 +48,6 @@ public class PageFilter implements Filter {
 	@Autowired
 	MenuInfoService menuService;
 
-	@Autowired
-	CommonService commonService;
-
-	@Autowired
-	BlogService bservice;
 
 	@Autowired
 	public StasticService stasticService;
@@ -216,11 +210,7 @@ public class PageFilter implements Filter {
 						// TODO: handle exception
 					}
 				} else {
-					// ?i=
-					Blog q = new Blog();
-					q.setImei(imei);
-					Blog bg = bservice.getBlogInfoById(q);
-					month = bg.getShowdate();
+					
 
 				}
 
@@ -303,11 +293,7 @@ public class PageFilter implements Filter {
 
 		HttpSession session = request.getSession();
 
-		// 黑名单过滤
-		if (commonService.isInBlackIPList(request))
-			return;
-
-		/*
+	/*
 		 * chain.doFilter(request, response); if(true) return;
 		 */
 
@@ -332,11 +318,11 @@ public class PageFilter implements Filter {
 		}
 
 	
-		if (StaticFilter(request, response2, chain))
-			return;
+		//if (StaticFilter(request, response2, chain))
+		//	return;
 		
-		 if (WeiStaticFilter(request, response2, chain))
-		 return;
+		// if (WeiStaticFilter(request, response2, chain))
+		// return;
 
 
 		// 配置文件中读取
@@ -409,7 +395,8 @@ public class PageFilter implements Filter {
 
 			}
 
-			if (request.getRequestURI().endsWith("/")) {
+			if (request.getRequestURI().endsWith("/")&&!request.getRequestURI().endsWith("detail/")
+					&&!request.getRequestURI().endsWith("todo/")) {
 
 				// zj 171215 直接访问url权限过滤
 				// System.out.println("filter:"+request.getRequestURI());

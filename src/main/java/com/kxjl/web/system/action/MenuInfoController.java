@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.kxjl.tool.common.Constant;
 import com.kxjl.tool.utils.JsonUtil;
-import com.kxjl.web.blog.action.Kdata;
-import com.kxjl.web.blog.model.Blog;
+
 import com.kxjl.web.privilege.model.Role;
 import com.kxjl.web.privilege.service.PrivilegeService;
+import com.kxjl.web.system.Kdata;
 import com.kxjl.web.system.action.base.BaseController;
 import com.kxjl.web.system.model.MenuGroup;
 import com.kxjl.web.system.model.MenuInfo;

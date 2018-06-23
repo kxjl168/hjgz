@@ -18,7 +18,7 @@ import com.kxjl.web.system.dao.MenuInfoDao;
 import com.kxjl.web.system.dao.SvrFileInfoDao;
 import com.kxjl.web.system.model.DictInfo;
 import com.kxjl.web.system.model.SvrFileInfo;
-import com.kxjl.web.system.service.CommonService;
+
 import com.kxjl.web.system.service.DictInfoService;
 import com.kxjl.web.system.service.SysService;
 import com.kxjl.web.system.service.SystemParamService;
@@ -35,9 +35,7 @@ public class SysServiceImpl implements SysService {
 	@Autowired
 	private DictInfoDao dictInfoService;
 
-	@Autowired
-	private CommonService commonService;
-	
+
 	@Autowired
 	private SvrFileInfoDao fileInfoDao;
 

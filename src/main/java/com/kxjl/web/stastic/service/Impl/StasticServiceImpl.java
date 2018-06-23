@@ -315,6 +315,28 @@ public class StasticServiceImpl implements StasticService {
 	{
 		return stasticDao.GetActionList(query);
 	}
+	
+	/**
+	 * 实时统计
+	 * 
+	 * @param map
+	 * @return
+	 * @author zj
+	 * @date 2018-6-23
+	 */
+	public List<ActionLog> GetStaticDataNow(ActionLog query){
+		return  stasticDao.GetStaticDataNow(query);
+
+	}
+	
+	
+	
+	/*
+	 * 历史统计、天、周、月所有数量
+	 */
+	public List<ActionLog> GetStaticData(ActionLog query){
+		return stasticDao.GetStaticData(query);
+	}
 
 	/**
 	 * 获取指定分类的具体数据

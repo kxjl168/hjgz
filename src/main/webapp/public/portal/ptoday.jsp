@@ -6,11 +6,11 @@
 	<div class=" panel panel-success kpanel">
             <div class="panel-heading " title="" >
                 <div class="row">
-                    <h3 class="panel-title  col-xs-10">
+                    <h3 class="panel-title nopaddding  font-blue col-xs-10">
                     当天
                     </h3>
 
-<div class="small text-right">更多</div>
+<div class="small text-right  font-blue">更多</div>
 
 
                     <span id="titlepic" class="hide" data-toggle="collapse" data-parent="#accordion" href="#collapseOner11" class="glyphicon glyphicon-chevron-up pull-right "></span>

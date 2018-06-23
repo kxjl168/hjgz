@@ -2,7 +2,6 @@ package com.kxjl.web.stastic.model;
 
 import java.util.List;
 
-import com.kxjl.web.blog.model.Blog;
 
 import com.kxjl.web.system.model.base.BaseModel;
 
@@ -77,6 +76,15 @@ public class ActionLog extends BaseModel {
 	private String time1;
 	private String time2;
 	private String dateFormat;
+	
+	
+	private Double lixian;
+	private Double yujing;
+	private Double gaojing;
+	private Double total;
+	private String table;
+	private String wendu;
+	
 	
 	//查询字段
 	private String type_name;
@@ -209,6 +217,54 @@ public class ActionLog extends BaseModel {
 
 	public void setItemname(String itemname) {
 		this.itemname = itemname;
+	}
+
+	public Double getLixian() {
+		return lixian;
+	}
+
+	public void setLixian(Double lixian) {
+		this.lixian = lixian;
+	}
+
+	public Double getYujing() {
+		return yujing;
+	}
+
+	public void setYujing(Double yujing) {
+		this.yujing = yujing;
+	}
+
+	public Double getGaojing() {
+		return gaojing;
+	}
+
+	public void setGaojing(Double gaojing) {
+		this.gaojing = gaojing;
+	}
+
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
+	public String getTable() {
+		return table;
+	}
+
+	public void setTable(String table) {
+		this.table = table;
+	}
+
+	public String getWendu() {
+		return wendu;
+	}
+
+	public void setWendu(String wendu) {
+		this.wendu = wendu;
 	}
 
 	
